@@ -1,0 +1,6 @@
+# Prettier가 자바 파일을 무시하도록 설정
+*.java
+.project
+.classpath
+bin/
+build/

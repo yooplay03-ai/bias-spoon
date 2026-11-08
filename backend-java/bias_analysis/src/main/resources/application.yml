@@ -1,0 +1,59 @@
+# 1. Database 설정 (MySQL 기준)
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bias_analysisdb?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
+    # 2. 보안: 환경 변수 사용 (깃허브 노출 방지)
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  # 3. JPA/Hibernate 설정
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+        "[hibernat.format_sql]": true
+        "[hibernat.default_batch_fetch_size]": 100
+        "[hibernat.dialect]": org.hibernate.dialect.MySQLDialect
+  
+  sql:
+    init:
+      mode: always
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# 4. 한글 인코딩 설정
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# 5. JWT 설정 (비밀키는 환경 변수로 주입)
+jwt:
+  secret: ${JWT_SECRET}
+  token-validity-in-seconds: 1800
+  refresh-token-validity-in-seconds: 1209600
+
+# 로그 확인
+logging:
+  level:
+    root: INFO
+    com.bias_analysis: DEBUG # 본인 패키지명에 맞춰 수정 (로직 로그 확인용)
+    org.springframework.web: DEBUG # 어떤 URL로 들어오는지 확인용
+    org.springframework.security: DEBUG # 보안 필터 어디서 막히는지 확인용
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

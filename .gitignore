@@ -1,0 +1,23 @@
+# 의존성 패키지 (가장 중요: 무조건 제외해야 함)
+node_modules/
+dist/
+build/
+venv/
+__pycache__/
+backend-python/saved_model/
+
+# 환경 변수 및 설정 (보안)
+.env
+.env.local
+.env.*.local
+
+# OS 및 에디터 설정
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 로그 및 캐시
+*.log
+npm-debug.log*
+.eslintcache
